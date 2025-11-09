@@ -1,25 +1,19 @@
-import { createBrowserRouter } from "react-router-dom";
+import { createHashRouter } from "react-router-dom";
 import App from "./App";
 import LandingPage from "./pages/LandingPage";
 import Placeholder from "./pages/Placeholder";
 import NotFound from "./pages/NotFound";
 
-export const router = createBrowserRouter(
-  [
-    {
-      path: "/",
-      element: <App />,
-      children: [
-        { index: true, element: <LandingPage /> },
-        { path: "services", element: <Placeholder title="Services" /> },
-        { path: "about", element: <Placeholder title="About" /> },
-        { path: "contact", element: <Placeholder title="Contact" /> }
-      ],
-      errorElement: <NotFound />
-    }
-  ],
+export const router = createHashRouter([
   {
-    // EXACT repo path, no trailing slash:
-    basename: "/everyday-essentials"
+    path: "/",
+    element: <App />,
+    children: [
+      { index: true, element: <LandingPage /> },
+      { path: "services", element: <Placeholder title="Services" /> },
+      { path: "about", element: <Placeholder title="About" /> },
+      { path: "contact", element: <Placeholder title="Contact" /> }
+    ],
+    errorElement: <NotFound />
   }
-);
+]);
