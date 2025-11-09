@@ -30,8 +30,7 @@ jobs:
           VITE_SQUARE_BOOKING_URL: ${{ secrets.VITE_SQUARE_BOOKING_URL }}
         run: npm run build
 
-      # >>> SPA fallback for GitHub Pages:
-      # Copy the processed index.html (with correct asset URLs) to 404.html
+      # Create a processed SPA 404 (so deep links work)
       - name: Create 404 SPA fallback
         run: cp dist/index.html dist/404.html
 
