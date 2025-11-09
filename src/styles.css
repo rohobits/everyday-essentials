@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root { color-scheme: light; }
+
+.container-max { @apply max-w-6xl mx-auto px-4 sm:px-6; }
+.btn-primary { @apply inline-flex items-center justify-center rounded-xl2 bg-primary px-5 py-3 text-white font-medium shadow-soft hover:bg-primaryDark transition; }
+.btn-outline { @apply inline-flex items-center justify-center rounded-xl2 border border-primary text-primary px-5 py-3 font-medium hover:bg-primary/10 transition; }
+.card { @apply bg-white rounded-xl2 shadow-soft p-6; }
+.kicker { @apply uppercase tracking-widest text-xs text-slate font-semibold; }
+.h1 { @apply text-4xl sm:text-5xl font-semibold tracking-tight; }
+.h2 { @apply text-2xl sm:text-3xl font-semibold tracking-tight; }
