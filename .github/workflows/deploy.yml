@@ -17,13 +17,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Use Node 20
+      - name: Use Node 20 (no cache)
         uses: actions/setup-node@v4
         with:
           node-version: "20"
-          cache: "npm"
 
-      # Use npm install (works without a lock file)
       - name: Install deps
         run: npm install --no-audit --fund=false --progress=false
 
