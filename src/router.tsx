@@ -19,7 +19,7 @@ export const router = createBrowserRouter(
     }
   ],
   {
-    // IMPORTANT: your repo name here (no trailing slash)
+    // EXACT repo path, no trailing slash:
     basename: "/everyday-essentials"
   }
 );
