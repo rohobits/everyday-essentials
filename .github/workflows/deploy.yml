@@ -23,6 +23,14 @@ jobs:
           node-version: 20
       - run: npm install --no-audit --fund=false --progress=false
       - run: npm run build
+     - run: cp dist/index.html dist/404.html
+     - run: touch dist/.nojekyll
+     - name: Show dist tree
+  run: |
+    echo "== DIST ==" && ls -lah dist
+    echo "== ASSETS ==" && ls -lah dist/assets || true
+    echo "== INDEX TOP ==" && sed -n '1,40p' dist/index.html
+
       - run: cp dist/index.html dist/404.html
       - name: Show dist tree
         run: |
