@@ -1,5 +1,4 @@
 name: Deploy Vite App to GitHub Pages
-
 on:
   push:
     branches: [ main ]
@@ -27,9 +26,8 @@ jobs:
       - run: cp dist/index.html dist/404.html
       - name: Show dist tree
         run: |
-          echo "== DIST CONTENTS ==" && ls -lah dist
-          echo "== ASSETS ==" && ls -lah dist/assets || true
-          echo "== FIRST 40 LINES OF dist/index.html ==" && sed -n '1,40p' dist/index.html
+          echo "== DIST ==" && ls -lah dist
+          echo "== INDEX TOP ==" && sed -n '1,40p' dist/index.html
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist
