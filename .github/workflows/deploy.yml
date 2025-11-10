@@ -1,51 +1,38 @@
-name: Deploy to GitHub Pages
+name: Deploy Vite App to GitHub Pages
 
 on:
   push:
-    branches: [ main ]
-  workflow_dispatch:
-
-permissions:
-  contents: read
-  pages: write
-  id-token: write
+    branches:
+      - main
 
 jobs:
-  build:
+  build-and-deploy:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v3
 
-      - name: Use Node 20 (no cache)
-        uses: actions/setup-node@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
         with:
-          node-version: "20"
+          node-version: 20
 
-      - name: Install deps
+      - name: Install dependencies
         run: npm install --no-audit --fund=false --progress=false
 
       - name: Build
+        # optional env for your Square URL; safe to keep empty for now
         env:
           VITE_SQUARE_BOOKING_URL: ${{ secrets.VITE_SQUARE_BOOKING_URL }}
         run: npm run build
 
-      # Create a processed SPA 404 (so deep links work)
-      - name: Create 404 SPA fallback
+      # Create an SPA fallback so deep links work on Pages
+      - name: Create 404.html from processed index.html
         run: cp dist/index.html dist/404.html
 
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
         with:
-          path: dist
-
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    steps:
-      - name: Deploy
-        id: deployment
-        uses: actions/deploy-pages@v4
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist
